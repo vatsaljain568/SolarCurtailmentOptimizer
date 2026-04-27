@@ -14,7 +14,7 @@ const App = () => {
   useEffect(()=>{
     const checkAuthStatus = async ()=>{
       try{
-        const response = await fetch('http://localhost:8080/auth/verify', {
+        const response = await fetch('https://solarcurtailmentoptimizer.onrender.com/auth/verify', {
           credentials: 'include'
         })
 
