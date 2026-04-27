@@ -1,0 +1,52 @@
+import React, { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './page/Login';
+import Dashboard from './page/Dashboard';
+import HomePage from './page/HomePage';
+import About from './page/About';
+import Protected from './protection/Protected';
+import Navbar from './compo/Navbar';
+
+const App = () => {
+
+
+
+  useEffect(()=>{
+    const checkAuthStatus = async ()=>{
+      try{
+        const response = await fetch('http://localhost:8080/auth/verify', {
+          credentials: 'include'
+        })
+
+        if(response.ok){
+          setIsAuthenticated(true)
+        }else{
+          setIsAuthenticated(false)
+        }
+      }catch(error){
+        setIsAuthenticated(false)
+      }
+
+      checkAuthStatus()
+    }
+  },[])
+
+  return (
+    <div className='w-full min-h-screen box-border bg-[#09090b] text-white overflow-auto scrollbar-hide'>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path='/dashboard' element={<Protected><Dashboard /></Protected>} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/' element={<HomePage />}    />
+        </Routes>
+      </Router>
+
+    </div>
+  )
+}
+
+
+
+export default App
