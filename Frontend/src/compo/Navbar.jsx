@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Home, Zap, LogOut, LogIn, Info, Menu, X, Settings } from 'lucide-react'
+import { Home, Zap, LogOut, LogIn, Info, Sparkles } from 'lucide-react'
 
 const Navbar = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const [isOpen, setIsOpen] = useState(false)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
@@ -13,7 +12,6 @@ const Navbar = () => {
     setIsAuthenticated(cookies && cookies.trim().length > 0)
   }, [])
 
-  // Hide navbar on login page
   if (location.pathname === '/login') {
     return null
   }
@@ -34,9 +32,11 @@ const Navbar = () => {
 
   const isActive = (path) => location.pathname === path
 
+  // ADDED: Insights to the navigation array
   const navItems = [
     { label: 'Home', path: '/', icon: Home },
     { label: 'Dashboard', path: '/dashboard', icon: Zap },
+    { label: 'Insights', path: '/insights', icon: Sparkles },
     { label: 'About', path: '/about', icon: Info },
   ]
 
@@ -45,7 +45,7 @@ const Navbar = () => {
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex justify-between items-center h-16'>
           
-          {/* Logo - Left */}
+          {/* Logo */}
           <div className='flex items-center gap-2 cursor-pointer' onClick={() => navigate('/')}>
             <Zap size={22} className='text-[#34D399]' fill="currentColor" />
             <span className='text-xl font-bold text-white tracking-wide'>
@@ -53,7 +53,7 @@ const Navbar = () => {
             </span>
           </div>
 
-          {/* Desktop Navigation - Center */}
+          {/* Desktop Navigation */}
           <div className='hidden md:flex items-center gap-1'>
             {navItems.map((item) => {
               const Icon = item.icon
@@ -63,7 +63,7 @@ const Navbar = () => {
                   onClick={() => navigate(item.path)}
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
                     isActive(item.path)
-                      ? 'bg-[#064E3B]/40 text-[#34D399] font-medium'
+                      ? 'bg-[#064E3B]/40 text-[#34D399] font-medium border-b-2 border-[#34D399] rounded-b-none' 
                       : 'text-gray-400 hover:text-gray-200 hover:bg-[#111827]'
                   }`}
                 >
@@ -74,9 +74,8 @@ const Navbar = () => {
             })}
           </div>
 
-          {/* Right Side Buttons */}
+          {/* Login/Logout */}
           <div className='flex items-center gap-3'>
-            {/* Desktop Login/Logout */}
             <button
               onClick={isAuthenticated ? handleLogout : () => navigate('/login')}
               className={`hidden md:flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
