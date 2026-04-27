@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './page/Login';
 import Dashboard from './page/Dashboard';
 import HomePage from './page/HomePage';
+import Insights from './page/Insights';
 import About from './page/About';
 import Protected from './protection/Protected';
 import Navbar from './compo/Navbar';
@@ -35,6 +36,7 @@ const [isAuthenticated, setIsAuthenticated] = useState(false) // ✅ add this
           <Route path='/dashboard' element={<Protected><Dashboard /></Protected>} />
           <Route path='/login' element={<Login />} />
           <Route path='/about' element={<About />} />
+          <Route path='/insights' element={<Insights />} />
           <Route path='/' element={<HomePage />}    />
         </Routes>
       </Router>
