@@ -41,12 +41,14 @@ const Navbar = () => {
   ]
 
   return (
-    <nav className='w-full bg-[#0a0a0d] border-b mt-2 border-[#2a2a2e] sticky top-0 z-50 '>
+    <nav className='w-full bg-[#0B1120] border-b border-gray-800/80 sticky top-0 z-50 '>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex justify-between items-center h-16'>
+          
           {/* Logo - Left */}
           <div className='flex items-center gap-2 cursor-pointer' onClick={() => navigate('/')}>
-            <span className='text-xl font-bold bg-gradient-to-r from-[#00f5ff] to-[#bf00ff] bg-clip-text text-transparent'>
+            <Zap size={22} className='text-[#34D399]' fill="currentColor" />
+            <span className='text-xl font-bold text-white tracking-wide'>
               SolarGrid
             </span>
           </div>
@@ -61,8 +63,8 @@ const Navbar = () => {
                   onClick={() => navigate(item.path)}
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
                     isActive(item.path)
-                      ? 'bg-[#00f5ff] text-black font-semibold'
-                      : 'text-[#999] hover:text-white hover:bg-[#1a1a1e]'
+                      ? 'bg-[#064E3B]/40 text-[#34D399] font-medium'
+                      : 'text-gray-400 hover:text-gray-200 hover:bg-[#111827]'
                   }`}
                 >
                   <Icon size={18} />
@@ -79,8 +81,8 @@ const Navbar = () => {
               onClick={isAuthenticated ? handleLogout : () => navigate('/login')}
               className={`hidden md:flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
                 isAuthenticated
-                  ? 'bg-[#ff4d4d]/10 border border-[#ff4d4d] text-[#ff4d4d] hover:bg-[#ff4d4d]/20'
-                  : 'bg-[#00f5ff]/10 border border-[#00f5ff] text-[#00f5ff] hover:bg-[#00f5ff]/20'
+                  ? 'bg-red-500/10 border border-red-500/30 text-red-400 hover:bg-red-500/20'
+                  : 'bg-[#064E3B]/20 border border-[#10B981]/30 text-[#34D399] hover:bg-[#064E3B]/40'
               }`}
             >
               {isAuthenticated ? (
@@ -97,9 +99,6 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-
-        {/* Mobile Navigation */}
-
       </div>
     </nav>
   )
