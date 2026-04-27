@@ -9,22 +9,23 @@ import Navbar from './compo/Navbar';
 
 const App = () => {
 
-
+const [isAuthenticated, setIsAuthenticated] = useState(false) // ✅ add this
 
   useEffect(() => {
-  const checkAuthStatus = async () => {
-    try {
-      const response = await fetch('https://solarcurtailmentoptimizer.onrender.com/auth/verify', {
-        credentials: 'include'
-      });
-      setIsAuthenticated(response.ok);
-    } catch {
-      setIsAuthenticated(false);
+    const checkAuthStatus = async () => {
+      try {
+        const res = await fetch('https://solarcurtailmentoptimizer.onrender.com/auth/verify', {
+  credentials: 'include',
+  cache: 'no-store'  // ✅ tells browser never cache this request
+});
+        setIsAuthenticated(response.ok)
+      } catch {
+        setIsAuthenticated(false)
+      }
     }
-  };
 
-  checkAuthStatus();  // ← outside, this actually runs it
-}, []);
+    checkAuthStatus() // ✅ called outside the definition
+  }, [])
 
   return (
     <div className='w-full min-h-screen box-border bg-[#09090b] text-white overflow-auto scrollbar-hide'>

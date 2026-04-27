@@ -30,12 +30,12 @@ const loginUser = async (req,res)=>{
     _id: user._id
 }, process.env.JWT_SECRET)
 
-res.cookie('token', token,{
+res.cookie('token', token, {
   httpOnly: true,
-  secure: true,          // required for HTTPS (Render uses HTTPS)
-  sameSite: 'None',      // required for cross-origin requests
-  maxAge: 24 * 60 * 60 * 1000  // 1 day
-} );
+  secure: true,
+  sameSite: 'None',
+  maxAge: 24 * 60 * 60 * 1000
+});
 
 return res.status(200).json({
     message: 'The user can login',
@@ -55,6 +55,9 @@ const logoutUser = (req,res)=>{
 }
 
 const verifyUser = (req,res)=>{
+
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+  res.set('Pragma', 'no-cache');
     const user = req.user;
     console.log(3);
     
