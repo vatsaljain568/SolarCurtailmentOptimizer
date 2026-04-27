@@ -18,7 +18,7 @@ const Login = () => {
       body: JSON.stringify({ email, password })
     })
     if(response.ok){
-      navigate('/Dashboard')
+      navigate('/dashboard')
     }else{
       navigate('/login')
     }
