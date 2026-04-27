@@ -14,7 +14,7 @@ const App = () => {
   useEffect(()=>{
     const checkAuthStatus = async ()=>{
       try{
-        const response = await fetch('https://solarcurtailmentoptimizer.onrender.com/auth/verify', {
+        const response = await fetch('https://localhost:8080/auth/verify', {
           credentials: 'include'
         })
 
@@ -36,7 +36,7 @@ const App = () => {
       <Router>
         <Navbar />
         <Routes>
-          <Route path='/dashboard' element={<Protected><Dashboard /></Protected>} />
+          <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/login' element={<Login />} />
           <Route path='/about' element={<About />} />
           <Route path='/' element={<HomePage />}    />

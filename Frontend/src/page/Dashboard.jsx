@@ -31,7 +31,7 @@ const Dashboard = () => {
         <Headers />
 
         {/* Primary Analytics Section */}
-        <div className='mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6 items-center'>
+        <div className='mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch'>
           <div className='lg:col-span-2'>
             <Chart/>
           </div>

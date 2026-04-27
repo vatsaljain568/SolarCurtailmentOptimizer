@@ -30,11 +30,7 @@ const loginUser = async (req,res)=>{
     _id: user._id
 }, process.env.JWT_SECRET)
 
-res.cookie('token', token, {
-    httpOnly: true,
-    secure: true,       // required for https
-    sameSite: 'none'    // required for cross-origin (vercel → render)
-});
+res.cookie('token', token, );
 
 return res.status(200).json({
     message: 'The user can login',
