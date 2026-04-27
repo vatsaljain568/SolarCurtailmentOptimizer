@@ -13,15 +13,6 @@ import BeforeAfter from '@/compo/BeforeAfter';
 
 const Dashboard = () => {
 
-    const [backdata, setbackdata] = useState(null);
-    const [error, seterror] = useState(null)
-
-    useEffect(()=>{
-        fetch('http://localhost:8080/')
-        .then(res=> res.text())
-        .then(data=>setbackdata(data))
-        .catch(err => seterror(err.message))
-    },[])
 
   return (
     <div className='w-full min-h-screen bg-[#09090b]'>

@@ -8,7 +8,7 @@ const Protected = ({children}) => {
     useEffect(() => {
   const verifyAuth = async () => {
     try {
-      const res = await fetch('http://localhost:8080/auth/verify', {
+      const res = await fetch('https://solarcurtailmentoptimizer.onrender.com//auth/verify', {
         credentials: 'include'
       });
       if (res.ok) {
