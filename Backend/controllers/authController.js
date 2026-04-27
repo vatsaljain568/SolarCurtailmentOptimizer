@@ -5,10 +5,12 @@ const bcrypt = require('bcrypt')
 
 const loginUser = async (req,res)=>{
     let {email,password} = req.body;
+    console.log(100);
 
     const user = await User.findOne({email: email});
 
     if(!user){
+        console.log("user not found");
         return res.status(401).json({
             message: 'Enter valid email!'
         })
@@ -18,6 +20,7 @@ const loginUser = async (req,res)=>{
     const isPassword = await bcrypt.compare(password, user.password );
 
     if(!isPassword){
+        console.log("wrong password");
         return res.status(401).json({
             message: 'Enter valid password!'
         })
@@ -27,7 +30,11 @@ const loginUser = async (req,res)=>{
     _id: user._id
 }, process.env.JWT_SECRET)
 
-res.cookie('token', token);
+res.cookie('token', token, {
+    httpOnly: true,
+    secure: true,       // required for https
+    sameSite: 'none'    // required for cross-origin (vercel → render)
+});
 
 return res.status(200).json({
     message: 'The user can login',
