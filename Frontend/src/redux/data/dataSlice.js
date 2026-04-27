@@ -64,7 +64,7 @@ export const fetchData = () => async (dispatch) => {
     dispatch(setLoading());
     const date = new Date().toISOString().split('T')[0];
     try {
-        const response = await fetch('http://localhost:8080/fetchData',{
+        const response = await fetch('https://solar-curtailment-optimizer-backend.onrender.com/optimize/schedule',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
