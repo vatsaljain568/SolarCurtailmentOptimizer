@@ -13,7 +13,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 var corsOption = {
-    origin: 'http://localhost:5173',
+    origin: 'https://solarcurtailmentoptimizer.vercel.app/',
     credentials: true
 }
 app.use(cors(corsOption))
