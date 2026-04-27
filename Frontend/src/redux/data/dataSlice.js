@@ -74,6 +74,8 @@ export const fetchData = () => async (dispatch) => {
         }),
     });
         const json = await response.json();
+
+        console.log(json);
         
         dispatch(setData(json));
     } catch (err) {
