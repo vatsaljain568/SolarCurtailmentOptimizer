@@ -23,41 +23,60 @@ const Login = () => {
       navigate('/login')
     }
   }
+
   return (
-    <div className='bg-[#0e0e0e] w-full min-h-screen flex items-center justify-center gap-2 '>
-      <form onSubmit={(e)=>{
-        formSubmitted(e)
-      }} className='bg-[#1a1a1a] p-8 rounded-lg flex flex-col w-100'>
+    <div className="min-h-screen w-full bg-[#0B1120] flex items-center justify-center font-sans p-4 relative overflow-hidden text-white">
 
+      {/* Subtle background glow effect */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#10B981]/5 blur-[120px] rounded-full pointer-events-none"></div>
 
-        <div className='flex flex-col justify-center items-center  mb-4'>
-          <KeySquare className='bg-[#00f5c4] rounded p-2 text-black mb-4' size={48} strokeWidth={2.25} />
-          <h1 className='text-2xl'>Welcome Back</h1>
-          <h1 className='text-sm text-[#666]'>Sign in your Dashboard</h1>
+      {/* Login Form */}
+      <form onSubmit={(e) => formSubmitted(e)} className="w-full max-w-md bg-[#111827] border border-gray-800/80 rounded-2xl shadow-2xl p-8 relative z-10 flex flex-col">
+
+        {/* Header Area */}
+        <div className="flex flex-col items-center mb-10">
+          <div className="w-14 h-14 bg-[#064E3B]/30 border border-[#10B981]/30 rounded-xl flex items-center justify-center mb-5">
+            <KeySquare size={28} className="text-[#34D399]" />
+          </div>
+          <h2 className="text-2xl font-bold text-white tracking-tight">Welcome Back</h2>
+          <p className="text-gray-400 text-sm mt-2">Sign in to your Dashboard</p>
         </div>
 
-        <div className='= flex flex-col mb-5'>
-          <h1 className='text-[#666] mb-1 text-sm'>USERNAME</h1>
-          <input onChange={(e)=>{setEmail(e.target.value)}} type="text" className='text-[#666] bg-[#333] rounded-md py-2 px-3 border-1 border-[#666]' placeholder='your@email.com '  />
+        {/* Email Input */}
+        <div className="flex flex-col mb-5">
+          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+            Username
+          </label>
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            placeholder="your@email.com"
+            className="w-full bg-[#0B1120] border border-gray-800 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#34D399] focus:ring-1 focus:ring-[#34D399]/50 transition-all"
+            required
+          />
         </div>
 
-        <div className=' flex flex-col mb-4'>
-          <h1 className='text-[#666] mb-1 text-sm '>PASSWORD</h1>
-          <input onChange={(e)=>{setPassword(e.target.value)}} type="password" className='text-[#666] bg-[#333] rounded-md py-2 px-3 border-1 border-[#666]'  />
+        {/* Password Input */}
+        <div className="flex flex-col mb-8">
+          <label className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+            Password
+          </label>
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            placeholder="••••••••"
+            className="w-full bg-[#0B1120] border border-gray-800 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#34D399] focus:ring-1 focus:ring-[#34D399]/50 transition-all"
+            required
+          />
         </div>
 
-        <div className='flex flex-row gap-3 items-center justify-between mb-5'>
-          <div className='flex flex-row gap-2 items-center'>
-            <input type='checkbox' className='bg-[#333] '/> 
-            <span className='text-sm text-[#666]'>REMEMBER ME</span>
-          </div >
-          <button className='text-purple-500 text-sm'>Forgot Password?</button>
-        </div>
-
-        <button className='w-full border border-[#333] rounded-lg px-3 py-2'>Sign In</button>
-
-        
-
+        {/* Sign In Button */}
+        <button
+          type="submit"
+          className="w-full py-3 px-4 bg-[#064E3B]/40 border border-[#10B981]/50 text-[#34D399] font-medium rounded-lg hover:bg-[#064E3B]/60 transition-colors duration-200"
+        >
+          Sign In
+        </button>
 
       </form>
     </div>
