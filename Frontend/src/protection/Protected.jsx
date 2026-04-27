@@ -14,9 +14,11 @@ const Protected = ({children}) => {
       if (res.ok) {
         setIsAuth(true);
       } else {
+        setIsAuth(false);
         navigate('/login');
       }
     } catch {
+      setIsAuth(false);
       navigate('/login');
     }
   };

@@ -11,25 +11,20 @@ const App = () => {
 
 
 
-  useEffect(()=>{
-    const checkAuthStatus = async ()=>{
-      try{
-        const response = await fetch('https://localhost:8080/auth/verify', {
-          credentials: 'include'
-        })
-
-        if(response.ok){
-          setIsAuthenticated(true)
-        }else{
-          setIsAuthenticated(false)
-        }
-      }catch(error){
-        setIsAuthenticated(false)
-      }
-
-      checkAuthStatus()
+  useEffect(() => {
+  const checkAuthStatus = async () => {
+    try {
+      const response = await fetch('https://solarcurtailmentoptimizer.onrender.com/auth/verify', {
+        credentials: 'include'
+      });
+      setIsAuthenticated(response.ok);
+    } catch {
+      setIsAuthenticated(false);
     }
-  },[])
+  };
+
+  checkAuthStatus();  // ← outside, this actually runs it
+}, []);
 
   return (
     <div className='w-full min-h-screen box-border bg-[#09090b] text-white overflow-auto scrollbar-hide'>
