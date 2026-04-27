@@ -13,7 +13,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 var corsOption = {
-    origin: 'https://solarcurtailmentoptimizer.vercel.app/',
+    origin: 'https://solarcurtailmentoptimizer.vercel.app',
     credentials: true
 }
 app.use(cors(corsOption))
