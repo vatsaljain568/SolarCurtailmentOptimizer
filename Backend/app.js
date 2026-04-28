@@ -1,18 +1,18 @@
 require('dotenv').config();
 const express = require('express');
-const app = express()
-const cors = require('cors')
-const { main } = require('./hash');
-require('dotenv').config();
+const app = express();
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const { main } = require('./hash');
 
-const allwoedOrigin = ['https://solarcurtailmentoptimizer.vercel.app',  
-    'http://localhost:5173',                           
-    'http://localhost:3000'  ]
+const allowedOrigins = [
+    'https://solarcurtailmentoptimizer.vercel.app',
+    'http://localhost:5173',
+    'http://localhost:3000'
+]
 
-app.use(cors({
+const corsOptions = {
     origin: function (origin, callback) {
-        // allow requests with no origin (Postman, mobile apps)
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true)
         } else {
@@ -20,28 +20,23 @@ app.use(cors({
         }
     },
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
-}))
+}
 
+app.use(cors(corsOptions))
+app.options('*', cors(corsOptions))  // handle preflight for all routes
 
 app.use(cookieParser());
-
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
-
 const slashRoutes = require('./route/slash.routes')
-
-app.use('/' ,slashRoutes)
+app.use('/', slashRoutes)
 
 const connectDB = require('./config/mongoose.config');
+connectDB();
 
-connectDB() // Call it!
-
-
-
-
-app.listen(8080);
-
+app.listen(8080, () => {
+    console.log('Server running on port 8080');
+});
