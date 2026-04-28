@@ -14,15 +14,34 @@ const Insights = () => {
         setLoading(true)
         setError(null)
         try {
-            const insightURL = getInsightBackendURL();
             const date = new Date().toISOString().split('T')[0];
 
-            console.log(`Calling: ${insightURL}/generate-insights`);
+            // Step 1: Fetch optimization data from optimizer backend
+            console.log('Fetching optimization data from optimizer backend...');
+            const optimizerRes = await fetch('https://solar-curtailment-optimizer-backend.onrender.com/optimize/schedule', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prediction_date: date })
+            });
+
+            if (!optimizerRes.ok) {
+                throw new Error(`Optimizer backend error: ${optimizerRes.statusText}`);
+            }
+
+            const optimizationData = await optimizerRes.json();
+            console.log('Successfully fetched optimization data');
+
+            // Step 2: Send optimization data to insight backend for AI analysis
+            const insightURL = getInsightBackendURL();
+            console.log(`Sending data to insight backend: ${insightURL}/generate-insights`);
 
             const res = await fetch(`${insightURL}/generate-insights`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ prediction_date: date })
+                body: JSON.stringify({
+                    prediction_date: date,
+                    optimization_data: optimizationData
+                })
             })
 
             if (!res.ok) {

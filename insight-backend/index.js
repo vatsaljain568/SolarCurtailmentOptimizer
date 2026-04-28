@@ -37,47 +37,31 @@ app.use(express.json());
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
-// Get optimizer backend URL based on environment
-const OPTIMIZER_BACKEND_URL = process.env.OPTIMIZER_BACKEND_URL || 'https://solar-curtailment-optimizer-backend.onrender.com';
-
 app.post("/generate-insights", async (req, res) => {
   try {
-    // Get prediction date from request or use today
-    const { prediction_date } = req.body;
-    const date = prediction_date || new Date().toISOString().split('T')[0];
+    // Get prediction date and optimization data from request
+    const { prediction_date, optimization_data } = req.body;
 
-    console.log(`Fetching data from: ${OPTIMIZER_BACKEND_URL}/optimize/schedule`);
-
-    // Fetch data from optimizer backend
-    const optimizerResponse = await fetch(`${OPTIMIZER_BACKEND_URL}/optimize/schedule`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ prediction_date: date }),
-    });
-
-    if (!optimizerResponse.ok) {
-      throw new Error(`Failed to fetch from optimizer backend: ${optimizerResponse.statusText}`);
+    if (!optimization_data) {
+      throw new Error('No optimization data provided');
     }
 
-    const optimizationData = await optimizerResponse.json();
-    console.log('Successfully fetched optimization data');
+    console.log(`Processing insights for date: ${prediction_date}`);
 
     // Preprocess data for Gemini
     const filtered = {
-      peak: optimizationData.peak,
+      peak: optimization_data.peak,
       summary: {
-        total_curtailed_mwh: optimizationData.summary.total_curtailed_mwh,
-        solar_utilization_percent: optimizationData.summary.solar_utilization_percent,
-        coal_reduction_percent: optimizationData.summary.coal_reduction_percent,
-        co2_avoided_tons: optimizationData.summary.co2_avoided_tons,
-        coal_saved_mwh: optimizationData.summary.coal_saved_mwh,
-        avg_solar_output_mw: optimizationData.summary.avg_solar_output_mw
+        total_curtailed_mwh: optimization_data.summary.total_curtailed_mwh,
+        solar_utilization_percent: optimization_data.summary.solar_utilization_percent,
+        coal_reduction_percent: optimization_data.summary.coal_reduction_percent,
+        co2_avoided_tons: optimization_data.summary.co2_avoided_tons,
+        coal_saved_mwh: optimization_data.summary.coal_saved_mwh,
+        avg_solar_output_mw: optimization_data.summary.avg_solar_output_mw
       },
-      alerts: optimizationData.alerts,
-      status: optimizationData.status,
-      curtailment: optimizationData.data
+      alerts: optimization_data.alerts,
+      status: optimization_data.status,
+      curtailment: optimization_data.data
         .filter(d => d.curtailment_mw > 20)
         .map(d => ({ time: d.time, curtailment_mw: d.curtailment_mw, coal_mw: d.coal_mw }))
     };
@@ -138,5 +122,5 @@ const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`✨ Insight Backend running on port ${PORT}`);
   console.log(`📍 CORS enabled for:`, allowedOrigins);
-  console.log(`🔗 Optimizer Backend URL: ${OPTIMIZER_BACKEND_URL}`);
+  console.log(`🔧 Receives optimization data from frontend, generates AI insights via Gemini`);
 });
