@@ -17,7 +17,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 app.post("/generate-insights", async (req, res) => {
   try {
-    //const data = req.body;
+    const data = req.body;
     const data = {
   "meta": {
     "time_step_minutes": 15,
@@ -407,16 +407,16 @@ ${JSON.stringify(filtered)}
 `;
 
     console.log(prompt);
-    const result = await model.generateContent("hello i am ayan!");
+    const result = await model.generateContent(prompt);
     console.log(result);
     
-//     const text = result.response.text();
+    const text = result.response.text();
 
-// console.log(text);
-//     // 🧠 Parse JSON safely
-//     const cleaned = text.replace(/```json|```/g, "").trim();
-//     console.log(cleaned);
-//     const parsed = JSON.parse(cleaned);
+console.log(text);
+    // 🧠 Parse JSON safely
+    const cleaned = text.replace(/```json|```/g, "").trim();
+    console.log(cleaned);
+    const parsed = JSON.parse(cleaned);
 
     res.json(result);
     console.log(result);
