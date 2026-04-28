@@ -42,13 +42,12 @@ const logoutUser = (req, res) => {
 }
 
 const verifyUser = (req, res) => {
-    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
-    res.set('Pragma', 'no-cache');
+    
 
     const user = req.user;
 
     if (!user) {
-        return res.status(400).json({ message: 'No user found' })
+        return res.status(404).json({ message: 'No user found' })
     }
 
     return res.status(200).json({

@@ -10,7 +10,7 @@ import Navbar from './compo/Navbar';
 
 const App = () => {
 
-const [isAuthenticated, setIsAuthenticated] = useState(false) // ✅ add this
+
 
  
 
