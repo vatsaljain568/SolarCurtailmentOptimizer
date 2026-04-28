@@ -12,23 +12,7 @@ const App = () => {
 
 const [isAuthenticated, setIsAuthenticated] = useState(false) // ✅ add this
 
-  useEffect(() => {
-    const checkAuthStatus = async () => {
-      try {
-        const res = await fetch('https://solarcurtailmentoptimizer.onrender.com/auth/verify', {
-        credentials: 'include',
-        cache: 'no-store'  // ✅ tells browser never cache this request
-        });
-        setIsAuthenticated(response.ok)
-      } catch {
-        setIsAuthenticated(false)
-      }
-    }
-
-    checkAuthStatus() // ✅ called outside the definition
-  }, [])
-
-  if (isAuthenticated === null) return <div>Verifying session...</div>
+ 
 
   return (
     <div className='w-full min-h-screen box-border bg-[#09090b] text-white overflow-auto scrollbar-hide'>
