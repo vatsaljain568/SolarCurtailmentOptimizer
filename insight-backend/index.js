@@ -373,11 +373,18 @@ app.post("/generate-insights", async (req, res) => {
 
     // 🔥 Preprocess (important)
     const filtered = {
-      peak: data.peak,
-      summary: data.summary,
-      alerts: data.alerts,
-      curtailment: data.data.filter(d => d.curtailment_mw > 20)
-    };
+  peak: data.peak,
+  summary: {
+    total_curtailed_mwh: data.summary.total_curtailed_mwh,
+    solar_utilization_percent: data.summary.solar_utilization_percent,
+    coal_reduction_percent: data.summary.coal_reduction_percent,
+    co2_avoided_tons: data.summary.co2_avoided_tons
+  },
+  alerts: data.alerts,
+  curtailment: data.data
+    .filter(d => d.curtailment_mw > 20)
+    .map(d => ({ time: d.time, curtailment_mw: d.curtailment_mw, coal_mw: d.coal_mw }))
+};
 
     const prompt = `
 You are an expert power grid analyst.
