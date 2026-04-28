@@ -26,7 +26,7 @@ const chartConfig = {
 
   if (loading) return <div className="text-white">Loading...</div>
   return (
-    <div className='w-full card p-8 border rounded-xl bg-gradient-to-br from-[#0f0f12]  to-[#1a1a1e] border-[#2a2a2e] hover:border-[#00f5ff]/50 transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(0,245,255,0.1)]'>
+    <div className='w-full card p-8 border rounded-2xl bg-[#111827] border-gray-800/80 hover:border-[#34D399]/50 transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(52,211,153,0.1)]'>
       <div className='flex gap-3 justify-between items-center px-4 py-3'>
   <h1 className='text-xl font-semibold text-white'>24-Hour Forecast</h1>
 

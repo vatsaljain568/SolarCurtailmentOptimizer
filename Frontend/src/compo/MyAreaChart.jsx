@@ -43,7 +43,7 @@ const MyAreaChart = () => {
     demand: { label: "Demand", color: CHART_COLORS.demand }
     } 
   return (
-    <div className='h-full card p-6 border rounded-xl bg-gradient-to-br  from-[#0f0f12] to-[#1a1a1e] border-[#2a2a2e] hover:border-[#00f5ff]/50 '>
+    <div className='h-full card p-6 border rounded-2xl bg-[#111827] border-gray-800/80 hover:border-[#34D399]/50 '>
         <div className='flex gap-3 justify-between items-center px-4 py-3'>
   <h1 className='text-xl font-semibold text-white'>Generation Overlap</h1>
 
@@ -89,7 +89,7 @@ const MyAreaChart = () => {
             }}
 
           >
-            <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="#2a2a2e" />
+            <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="#1F2937" />
             <XAxis dataKey='time' {...CHART_AXIS_CONFIG}
               tickMargin={8}
               tickFormatter={(value) => value.slice(0, 5)} />
