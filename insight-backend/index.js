@@ -407,19 +407,19 @@ ${JSON.stringify(filtered)}
 `;
 
     console.log(prompt);
-    const result = await model.generateContent(prompt);
+    const result = await model.generateContent("hello i am ayan!");
     console.log(result);
     
-    const text = result.response.text();
+//     const text = result.response.text();
 
-console.log(text);
-    // 🧠 Parse JSON safely
-    const cleaned = text.replace(/```json|```/g, "").trim();
-    console.log(cleaned);
-    const parsed = JSON.parse(cleaned);
+// console.log(text);
+//     // 🧠 Parse JSON safely
+//     const cleaned = text.replace(/```json|```/g, "").trim();
+//     console.log(cleaned);
+//     const parsed = JSON.parse(cleaned);
 
-    res.json(parsed);
-    console.log(parsed);
+    res.json(result);
+    console.log(result);
     
 
   } catch (err) {
