@@ -1,7 +1,7 @@
 // Consistent color palette for all charts
 export const CHART_COLORS = {
   solar: '#34D399',      // Emerald - Solar Generation
-  demand: '#10B981',     // Secondary Emerald - Electricity Demand
+  demand: '#3B82F6',     // Blue - Electricity Demand
   coal: '#064E3B',       // Dark Emerald - Coal Usage
   confidence: '#34D399', // Emerald - Confidence Score
   diff: '#ef4444',   // red

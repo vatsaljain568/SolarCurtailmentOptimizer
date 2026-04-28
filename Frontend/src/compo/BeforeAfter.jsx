@@ -94,7 +94,7 @@ const BeforeAfter = () => {
                     />
                     <ChartTooltip cursor={{ fill: 'rgba(255,255,255,0.03)' }} content={<ChartTooltipContent />} />
                     <Bar dataKey='value' radius={[8, 8, 0, 0]}>
-                        <Cell fill='#f97316' />
+                        <Cell fill='#EF4444' />
                         <Cell fill='#34D399' />
                     </Bar>
                 </BarChart>
