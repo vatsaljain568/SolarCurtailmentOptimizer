@@ -23,7 +23,7 @@ const MyTable = () => {
     // ]
 
     return (
-        <div className='card hover:border-[#00f5ff]/50 p-6 border rounded-xl bg-[#111] border-[#1e1e1e] w-160 '>
+        <div className='card hover:border-[#34D399]/50 p-6 border rounded-2xl bg-[#111827] border-gray-800/80 shadow-lg w-160 '>
 
             <div className='mb-4'>
                 <span className='font-medium tracking-widest uppercase text-[#aaa] text-sm'>
@@ -52,7 +52,7 @@ const MyTable = () => {
                                 key={i}
                                 className='border-[#1a1a1a] hover:bg-[#1a1a1a] transition-colors'
                             >
-                                <TableCell className='font-medium text-sm text-[#00e5ff] [text-shadow:0_0_8px_rgba(0,229,255,0.5)] '>
+                                <TableCell className='font-medium text-sm text-[#34D399] [text-shadow:0_0_8px_rgba(52,211,153,0.5)] '>
                                     {data.time}
                                 </TableCell>
 
@@ -61,7 +61,7 @@ const MyTable = () => {
                                         className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs  font-semibold tracking-wide border
                                             ${isDown
                                                 ? 'bg-[rgba(255,0,200,0.12)] text-[#ff00c8] border-[rgba(255,0,200,0.3)]'
-                                                : 'bg-[rgba(0,229,255,0.12)] text-[#00e5ff] border-[rgba(0,229,255,0.3)]'
+                                                : 'bg-[rgba(52,211,153,0.12)] text-[#34D399] border-[rgba(52,211,153,0.3)]'
                                             }`}
                                     >
                                         {isDown ? '▼' : '▲'} {isDown ? "ramp down" : "ramp up"}

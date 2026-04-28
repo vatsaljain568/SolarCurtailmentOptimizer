@@ -36,7 +36,7 @@ const BeforeAfter = () => {
     }
 
     return (
-        <div className='card  hover:border-[#00f5ff]/50 border rounded-xl bg-[#111] border-[#1e1e1e] p-6 flex flex-col h-full w-150  '>
+        <div className='card  hover:border-[#34D399]/50 border rounded-2xl bg-[#111827] border-gray-800/80 shadow-lg p-6 flex flex-col h-full w-150  '>
 
             <div className='flex gap-3 justify-between items-center px-4 py-3'>
             
@@ -80,7 +80,7 @@ const BeforeAfter = () => {
 
             <ChartContainer config={chartConfig} className='flex-1 w-full'>
                 <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 10 }}>
-                    <CartesianGrid vertical={false} stroke='#1e1e1e' />
+                    <CartesianGrid vertical={false} stroke='#1F2937' />
                     <XAxis
                         dataKey='label'
                         tick={{ fill: '#666', fontSize: 13, fontWeight: 600 }}
@@ -95,7 +95,7 @@ const BeforeAfter = () => {
                     <ChartTooltip cursor={{ fill: 'rgba(255,255,255,0.03)' }} content={<ChartTooltipContent />} />
                     <Bar dataKey='value' radius={[8, 8, 0, 0]}>
                         <Cell fill='#f97316' />
-                        <Cell fill='#4ade80' />
+                        <Cell fill='#34D399' />
                     </Bar>
                 </BarChart>
             </ChartContainer>

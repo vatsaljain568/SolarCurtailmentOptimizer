@@ -31,7 +31,7 @@ const Confidence = () => {
     const total = 76;
 
   return (
-    <div className='h-full flex flex-col card p-6 border rounded-xl bg-gradient-to-br from-[#0f0f12] to-[#1a1a1e] border-[#2a2a2e] hover:border-[#00f5ff]/50 '>
+    <div className='h-full flex flex-col card p-6 border rounded-2xl bg-[#111827] border-gray-800/80 hover:border-[#34D399]/50 '>
         <div className='flex gap-3 justify-between items-center px-4 py-3'>
   <h1 className='text-xl font-semibold text-white'>Confidence Score</h1>
 
@@ -76,7 +76,7 @@ const Confidence = () => {
                     cursor={false}
                     content={<ChartTooltipContent className='text-white' />}
                 />
-                <RadialBar dataKey='optimization_score' fill="#22c55e" stackId="a" cornerRadius={3} className="stroke-transparent stroke-2" >
+                <RadialBar dataKey='optimization_score' fill="#34D399" stackId="a" cornerRadius={3} className="stroke-transparent stroke-2" >
 
                 </RadialBar>
                 <ChartTooltip cursor={false} content={<ChartTooltipContent />} />

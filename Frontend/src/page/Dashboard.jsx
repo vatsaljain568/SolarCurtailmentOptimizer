@@ -15,16 +15,16 @@ const Dashboard = () => {
 
 
   return (
-    <div className='w-full min-h-screen bg-[#09090b]'>
+    <div className='w-full min-h-screen bg-[#0B1120]'>
       {/* Main Container */}
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
 
         {/* Page Title */}
         <div className='mb-12'>
-          <h1 className='text-4xl font-bold bg-gradient-to-r from-[#00f5ff] to-[#bf00ff] bg-clip-text text-transparent mb-2'>
+          <h1 className='text-4xl font-bold bg-gradient-to-r from-[#34D399] to-[#10B981] bg-clip-text text-transparent mb-2'>
             Grid Control Center
           </h1>
-          <p className='text-[#999]'>Real-time solar curtailment optimization & grid monitoring</p>
+          <p className='text-gray-400'>Real-time solar curtailment optimization & grid monitoring</p>
         </div>
 
         {/* Key Metrics Header */}
@@ -43,7 +43,7 @@ const Dashboard = () => {
         {/* Secondary Charts Section */}
         <div className='mt-12'>
           <h2 className='text-2xl font-semibold text-white mb-6 flex items-center gap-2'>
-            <div className='w-1 h-6 bg-gradient-to-b from-[#00f5ff] to-[#bf00ff]'></div>
+            <div className='w-1 h-6 bg-gradient-to-b from-[#34D399] to-[#10B981]'></div>
             Analysis Metrics
           </h2>
           <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
@@ -56,7 +56,7 @@ const Dashboard = () => {
         {/* Main Chart Section */}
         <div className='mt-12'>
           <h2 className='text-2xl font-semibold text-white mb-6 flex items-center gap-2'>
-            <div className='w-1 h-6 bg-gradient-to-b from-[#00f5ff] to-[#bf00ff]'></div>
+            <div className='w-1 h-6 bg-gradient-to-b from-[#34D399] to-[#10B981]'></div>
             Demand vs Supply
           </h2>
           <MyBarChart />
@@ -65,7 +65,7 @@ const Dashboard = () => {
         {/* Data Table & Before/After Section */}
         <div className='mt-12'>
           <h2 className='text-2xl font-semibold text-white mb-6 flex items-center gap-2'>
-            <div className='w-1 h-6 bg-gradient-to-b from-[#00f5ff] to-[#bf00ff]'></div>
+            <div className='w-1 h-6 bg-gradient-to-b from-[#34D399] to-[#10B981]'></div>
             System Operations
           </h2>
           <div className='flex gap-10 items-top'>

@@ -72,7 +72,7 @@ const MyRadarChart = () => {
     }
     if (loading) return <div className="text-white">Loading...</div>
   return (
-    <div className='card h-full p-6 border rounded-xl bg-gradient-to-br from-[#0f0f12] to-[#1a1a1e] border-[#2a2a2e] hover:border-[#00f5ff]/50 '>
+    <div className='card h-full p-6 border rounded-2xl bg-[#111827] border-gray-800/80 hover:border-[#34D399]/50 '>
         <div className='flex gap-3 justify-between items-center px-4 py-3'>
   <h1 className='text-xl font-semibold text-white'>6 Hours Analysis</h1>
 
@@ -111,8 +111,8 @@ const MyRadarChart = () => {
       <ChartContainer config={chartConfig} className='h-72 w-full'>
         <RadarChart data={chartData}>
             <ChartTooltip cursor={false} content={<ChartTooltipContent indicator='line' />} />
-            <PolarAngleAxis dataKey='time' stroke="#666" style={{ fontSize: 12 }} />
-            <PolarGrid radialLines={true} stroke="#2a2a2e" />
+            <PolarAngleAxis dataKey='time' stroke="#9CA3AF" style={{ fontSize: 12 }} />
+            <PolarGrid radialLines={true} stroke="#1F2937" />
             <Radar dataKey='solar' fillOpacity={0.1} fill={CHART_COLORS.solar} stroke={CHART_COLORS.solar} strokeWidth={2.5} />
             <Radar dataKey='demand' fillOpacity={0.1} fill={CHART_COLORS.demand} stroke={CHART_COLORS.demand} strokeWidth={2.5} />
             <Radar dataKey='coal' fillOpacity={0.1} fill={CHART_COLORS.coal} stroke={CHART_COLORS.coal} strokeWidth={2.5} />

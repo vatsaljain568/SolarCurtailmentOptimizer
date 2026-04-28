@@ -67,7 +67,7 @@ const MyRadialChart = () => {
 
 
   return (
-    <div className='card h-full p-6 border rounded-xl bg-gradient-to-br from-[#0f0f12] to-[#1a1a1e] border-[#2a2a2e] hover:border-[#00f5ff]/50 '>
+    <div className='card h-full p-6 border rounded-2xl bg-[#111827] border-gray-800/80 hover:border-[#34D399]/50 '>
             <div className='flex gap-3 justify-between items-center px-4 py-3'>
   <h1 className='text-xl font-semibold text-white'>Production Metrics</h1>
 
