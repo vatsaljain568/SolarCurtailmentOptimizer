@@ -1,83 +1,26 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/operator.model')
-const bcrypt = require('bcrypt')
 
+const verifyJWT = async (req, res, next) => {
+    try {
+        const token = req.cookies.token
+        if (!token) {
+            return res.status(400).json({
+                message: "Please login first !"
+            })
+        }
 
-const loginUser = async (req,res)=>{
-    let {email,password} = req.body;
-    console.log(100);
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await User.findOne({ _id: decodedToken._id }).select("-password")
 
-    const user = await User.findOne({email: email});
+        req.user = user;
+        next();
 
-    if(!user){
-        console.log("user not found");
-        return res.status(401).json({
-            message: 'Enter valid email!'
-        })
-    }
-
-
-    const isPassword = await bcrypt.compare(password, user.password );
-
-    if(!isPassword){
-        console.log("wrong password");
-        return res.status(401).json({
-            message: 'Enter valid password!'
-        })
-    }
-
-    const token = jwt.sign({
-    _id: user._id
-}, process.env.JWT_SECRET)
-
-res.cookie('token', token, {
-  httpOnly: true,
-  secure: true,
-  sameSite: 'None',
-  maxAge: 24 * 60 * 60 * 1000
-});
-
-return res.status(200).json({
-    message: 'The user can login',
-    token: token,  // ✅ Add this
-    name: user.name,
-    email: user.email,
-    _id: user._id
-})
-}
-
-const logoutUser = (req,res)=>{
-    res.clearCookie('token');
-
-    return res.status(200).json({
-        message: 'the user have successfully logged out'
-    })
-}
-
-const verifyUser = (req,res)=>{
-
-    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
-  res.set('Pragma', 'no-cache');
-    const user = req.user;
-    console.log(3);
-    
-    if(!user){
+    } catch (error) {
         return res.status(400).json({
-            message: 'No user found'
+            message: 'Invalid Access Token'
         })
     }
-
-    return res.status(200).json({
-        message: 'Valid user and can login',
-        name: user.name,
-        email: user.email,
-        _id: user._id
-    })
 }
 
-
-module.exports = {
-    loginUser,
-    logoutUser,
-    verifyUser
-}
+module.exports = { verifyJWT }
