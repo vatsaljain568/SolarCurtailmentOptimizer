@@ -8,14 +8,14 @@ const { main } = require('./hash');
 
 
 const corsOptions = {
-    origin: 'https://solarcurtailmentoptimizer.vercel.app/',
+    origin: 'https://solarcurtailmentoptimizer.vercel.app',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }
 
 app.use(cors(corsOptions))
-app.options('/(.*)', cors(corsOptions))  // handle preflight for all routes
+
 
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
