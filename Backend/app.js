@@ -7,16 +7,21 @@ require('dotenv').config();
 const cookieParser = require('cookie-parser');
 
 
+
+app.use(cors({
+    origin: 'https://solarcurtailmentoptimizer.vercel.app',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}))
+
+
 app.use(cookieParser());
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-var corsOption = {
-    origin: 'https://solarcurtailmentoptimizer.vercel.app',
-    credentials: true
-}
-app.use(cors(corsOption))
+
 
 const slashRoutes = require('./route/slash.routes')
 

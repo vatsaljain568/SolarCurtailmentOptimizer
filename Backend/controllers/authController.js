@@ -50,12 +50,16 @@ const verifyUser = (req, res) => {
         return res.status(404).json({ message: 'No user found' })
     }
 
-    return res.status(200).json({
-        message: 'Valid user and can login',
-        name: user.name,
-        email: user.email,
-        _id: user._id
-    })
+    if(user){
+
+        return res.status(200).json({
+            message: 'Valid user and can login',
+            name: user.name,
+            email: user.email,
+            _id: user._id
+        })
+
+    }
 }
 
 module.exports = { loginUser, logoutUser, verifyUser }
