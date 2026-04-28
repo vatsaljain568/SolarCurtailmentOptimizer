@@ -13,7 +13,7 @@ const Insights = () => {
         setLoading(true)
         setError(null)
         try {
-            const res = await fetch('https://localhost:8080/generate-insight', {
+            const res = await fetch('https://solarcurtailmentoptimizer-1.onrender.com/generate-insights', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({})
