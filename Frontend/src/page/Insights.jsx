@@ -2,27 +2,13 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Sparkles, Lightbulb, Zap, AlertTriangle, CheckCircle, Brain } from 'lucide-react'
 import InsightsHero from '../assets/InsightsHero.jpeg'
+import { getInsightBackendURL } from '../utils/apiConfig'
 
 const Insights = () => {
     const navigate = useNavigate()
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
-
-    // Determine API URL based on environment
-    const getInsightBackendURL = () => {
-        // If in production (Vercel), use production URL
-        if (window.location.hostname === 'solarcurtailmentoptimizer.vercel.app' ||
-            window.location.hostname.includes('vercel.app')) {
-            return 'https://solarcurtailmentoptimizer-1.onrender.com';
-        }
-        // If in localhost, use localhost
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            return 'http://localhost:5001';
-        }
-        // Fallback to production
-        return 'https://solarcurtailmentoptimizer-1.onrender.com';
-    };
 
     const generateInsights = async () => {
         setLoading(true)
