@@ -5,20 +5,10 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const { main } = require('./hash');
 
-const allowedOrigins = [
-    'https://solarcurtailmentoptimizer.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:3000'
-]
+
 
 const corsOptions = {
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    },
+    origin: 'https://solarcurtailmentoptimizer.vercel.app/',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
