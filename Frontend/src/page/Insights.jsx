@@ -16,7 +16,7 @@ const Insights = () => {
             const res = await fetch('https://solarcurtailmentoptimizer-1.onrender.com/generate-insights', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                body: JSON.stringify({})
             })
             if (!res.ok) throw new Error('Failed to fetch insights')
             const json = await res.json()
