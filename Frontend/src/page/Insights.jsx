@@ -9,20 +9,46 @@ const Insights = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
 
+    // Determine API URL based on environment
+    const getInsightBackendURL = () => {
+        // If in production (Vercel), use production URL
+        if (window.location.hostname === 'solarcurtailmentoptimizer.vercel.app' ||
+            window.location.hostname.includes('vercel.app')) {
+            return 'https://solarcurtailmentoptimizer-1.onrender.com';
+        }
+        // If in localhost, use localhost
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            return 'http://localhost:5001';
+        }
+        // Fallback to production
+        return 'https://solarcurtailmentoptimizer-1.onrender.com';
+    };
+
     const generateInsights = async () => {
         setLoading(true)
         setError(null)
         try {
-            const res = await fetch('https://solarcurtailmentoptimizer-1.onrender.com/generate-insights', {
+            const insightURL = getInsightBackendURL();
+            const date = new Date().toISOString().split('T')[0];
+
+            console.log(`Calling: ${insightURL}/generate-insights`);
+
+            const res = await fetch(`${insightURL}/generate-insights`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({})
+                body: JSON.stringify({ prediction_date: date })
             })
-            if (!res.ok) throw new Error('Failed to fetch insights')
+
+            if (!res.ok) {
+                const errorData = await res.json();
+                throw new Error(errorData.message || 'Failed to fetch insights');
+            }
+
             const json = await res.json()
             setData(json)
         } catch (err) {
-            setError('Could not load insights. Please try again.')
+            console.error('Error:', err);
+            setError(err.message || 'Could not load insights. Please try again.')
         } finally {
             setLoading(false)
         }
