@@ -13,7 +13,7 @@ app.use(cors({
 app.use(express.json());
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 app.post("/generate-insights", async (req, res) => {
   try {
@@ -399,14 +399,21 @@ DATA:
 ${JSON.stringify(filtered)}
 `;
 
+    console.log(prompt);
     const result = await model.generateContent(prompt);
+    console.log(result);
+    
     const text = result.response.text();
 
+console.log(text);
     // 🧠 Parse JSON safely
     const cleaned = text.replace(/```json|```/g, "").trim();
+    console.log(cleaned);
     const parsed = JSON.parse(cleaned);
 
     res.json(parsed);
+    console.log(parsed);
+    
 
   } catch (err) {
     console.error(err);
