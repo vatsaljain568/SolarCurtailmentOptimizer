@@ -1,34 +1,41 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const Protected = ({children}) => {
-    const [isAuth, setIsAuth] = useState(false)
-    
+const Protected = ({ children }) => {
+    const [isAuth, setIsAuth] = useState(null)  // ✅ null = still loading
     const navigate = useNavigate()
 
     useEffect(() => {
-      const verifyAuth = async () => {
-        try {
-          const res = await fetch('https://solarcurtailmentoptimizer.onrender.com/auth/verify', {
-            credentials: 'include',
-            cache: 'no-store'  // ✅ tells browser never cache this request
-          });
-          if (res.ok) {
-            setIsAuth(true);
-          } else {
-            setIsAuth(false);
-            navigate('/login');
-          }
-        } catch {
-          setIsAuth(false);
-          navigate('/login');
-        }
-  };
-  
-  verifyAuth();
-}, [navigate]); 
+        let isMounted = true  // ✅ prevent state update on unmounted component
 
-    if(isAuth === null) return <div>Loading...</div>
+        const verifyAuth = async () => {
+            try {
+                const res = await fetch('https://solarcurtailmentoptimizer.onrender.com/auth/verify', {
+                    credentials: 'include',
+                    cache: 'no-store'
+                });
+
+                if (!isMounted) return  // ✅ bail if unmounted
+
+                if (res.ok) {
+                    setIsAuth(true)
+                } else {
+                    setIsAuth(false)
+                    navigate('/login')
+                }
+            } catch {
+                if (!isMounted) return
+                setIsAuth(false)
+                navigate('/login')
+            }
+        }
+
+        verifyAuth()
+
+        return () => { isMounted = false }  // ✅ cleanup
+    }, [navigate])
+
+    if (isAuth === null) return <div>Loading...</div>  // ✅ actual loading state
     return isAuth ? children : null
 }
 
